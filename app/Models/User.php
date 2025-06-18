@@ -44,10 +44,18 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function getAgeAttribute()
-    {
-        return optional($this->date_of_birth)->age;
+public function getAgeAttribute()
+{
+    if (!$this->date_of_birth) {
+        return null;
     }
+    
+    $age = $this->date_of_birth->age;
+    
+    return $age === 0 ? '< 1' : $age;
+}
+
+
     /**
      * Get the attributes that should be cast.
      *

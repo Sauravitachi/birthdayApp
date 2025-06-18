@@ -92,5 +92,40 @@
                 {{ $users->appends(request()->all())->links() }}
             </div>
         </div>
+
     </div>
+
+    @php
+        $birthdayUsers = $users->filter(function ($user) {
+            return \Carbon\Carbon::parse($user->date_of_birth)->format('m-d') === now()->format('m-d');
+        });
+    @endphp
+
+    @if($birthdayUsers->isNotEmpty())
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+        @foreach($birthdayUsers as $user)
+            <div class="toast align-items-center text-white bg-success border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        🎉 <strong>Happy Birthday, {{ $user->first_name }} {{ $user->last_name }}!</strong><br>
+                        Wishing you a fantastic year ahead!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, { delay: 10000 })
+                toast.show()
+                return toast
+            })
+        });
+    </script>
+@endif
+
 @endsection

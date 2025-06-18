@@ -52,7 +52,7 @@
             <div class="card-footer text-end">
                 <button type="submit" class="btn btn-primary">Update User</button>
             </div>
-        </div>
+        </div> 
     </form>
 </div>
 @endsection

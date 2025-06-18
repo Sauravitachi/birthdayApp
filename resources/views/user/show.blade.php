@@ -3,6 +3,12 @@
 @section('title', 'My Profile')
 
 @section('content')
+
+@php
+    $today = now()->format('m-d');
+    $userBirthday = $user->date_of_birth ? $user->date_of_birth->format('m-d') : null;
+@endphp
+
 <div class="page-header d-print-none mt-4">
     <div class="container-xl">
         <div class="row g-2 align-items-center">
@@ -63,8 +69,10 @@
                                     <!-- Quick Stats -->
                                     <div class="row text-center">
                                         <div class="col-12">
-                                            <div class="h4 m-0">{{ $user->age }}</div>
-                                            <div class="text-muted small">Years Old</div>
+                                            <div class="h4 m-0">
+    {{ $user->age ? ($user->age === '< 1' ? 'Less than 1 year' : $user->age . ' years') : 'Not specified' }}
+</div>
+
                                         </div>                                        
                                     </div>
                                 </div>
@@ -211,6 +219,31 @@
         </div>
     </div>
 </div>
+@if($userBirthday === $today)
+    <div id="birthday-wish" style="position: fixed; top: 1rem; right: 1rem; z-index: 1050; background: #d4edda; border: 1px solid #c3e6cb; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 300px; font-weight: 600;">
+        🎂 Happy Birthday, {{ $user->first_name }}!<br>
+        May your year be filled with happiness and success.
+        <button onclick="document.getElementById('birthday-wish').remove()" style="border:none; background:none; font-weight:bold; cursor:pointer; float:right;">&times;</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Launch confetti on page load
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+        // Repeat confetti a few times
+        setTimeout(() => {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }, 3000);
+    </script>
+@endif
 
 <style>
 .avatar {
