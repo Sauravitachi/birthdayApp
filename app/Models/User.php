@@ -37,11 +37,17 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $casts = [
+        'date_of_birth' => 'date',
+    ];
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
+    public function getAgeAttribute()
+    {
+        return optional($this->date_of_birth)->age;
+    }
     /**
      * Get the attributes that should be cast.
      *
