@@ -12,7 +12,7 @@
            
 
             <!-- User Dropdown -->
-            <ul class="navbar-nav ms-auto ">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"
                         role="button" aria-expanded="false">
