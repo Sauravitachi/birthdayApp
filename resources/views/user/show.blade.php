@@ -125,7 +125,7 @@
                                                 </svg>
                                                 Date of Birth
                                             </label>
-                                            <div class="fw-medium">{{ $user->date_of_birth->format('M d, Y') }}</div>
+                                            <div class="fw-medium">{{ $user->date_of_birth ? $user->date_of_birth->format('M d, Y') : 'Not provided' }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

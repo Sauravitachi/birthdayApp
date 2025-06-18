@@ -1,31 +1,35 @@
+<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
-    
-    <!-- Tabler CSS -->
-    <link href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <!-- Fonts --><script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>  
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased">
-    <div class="page page-center">
-        <div class="container container-tight py-4">
-            <div class="text-center mb-4">
-                <a href="/">
-                    <x-application-logo class="h-5 w-auto mx-auto" />
-                </a>
-            </div>
-            
-            <div class="card card-md">
-                @yield('content')
-            </div>
-        </div>
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.navigation')
+
+        @hasSection('header')
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @yield('header')
+                </div>
+            </header>
+        @endif
+
+        <main>
+            @yield('content')
+        </main>
     </div>
-    
-    <!-- Tabler JS -->
-    <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
 </body>
 </html>
