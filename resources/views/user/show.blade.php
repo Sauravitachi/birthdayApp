@@ -10,6 +10,7 @@
 @endphp
 
 <div class="page-header d-print-none mt-4">
+    
     <div class="container-xl">
         <div class="row g-2 align-items-center">
             <div class="col">
@@ -135,22 +136,7 @@
                                             </label>
                                             <div class="fw-medium">{{ $user->date_of_birth ? $user->date_of_birth->format('M d, Y') : 'Not provided' }}</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-muted small fw-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                    <circle cx="12" cy="12" r="9"/>
-                                                    <path d="M9 10h.01"/>
-                                                    <path d="M15 10h.01"/>
-                                                    <path d="M9.5 15a3.5 3.5 0 0 0 5 0"/>
-                                                </svg>
-                                                Marital Status
-                                            </label>
-                                            <div class="fw-medium">{{ $user->marital_status ? ucfirst($user->marital_status) : 'Not specified' }}</div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                                 
                                 <!-- Address Information -->
@@ -211,13 +197,29 @@
                                         </div>
                                     </div>
                                 </div>
+                                <a href="{{ route('users.export.csv') }}" class="btn btn-outline-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z"/>
+                                        <path d="M12 17v-6"/>
+                                        <path d="M9.5 14.5l2.5 2.5l2.5 -2.5"/>
+                                    </svg>
+                                    Export CSV
+                                </a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
+                
             </div>
+            
         </div>
+        
+
     </div>
+    
 </div>
 @if($userBirthday === $today)
     <div id="birthday-wish" style="position: fixed; top: 1rem; right: 1rem; z-index: 1050; background: #d4edda; border: 1px solid #c3e6cb; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 300px; font-weight: 600;">
@@ -228,13 +230,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // Launch confetti on page load
         confetti({
             particleCount: 150,
             spread: 70,
             origin: { y: 0.6 }
         });
-        // Repeat confetti a few times
         setTimeout(() => {
             confetti({
                 particleCount: 150,

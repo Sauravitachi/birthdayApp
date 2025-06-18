@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+      $userCount = App\Models\User::get()->count();
+      @endphp
     <div class="container mt-4">
-        <h2>User Management</h2>
+       <div class="d-flex align-items-center gap-2"> <h2>User Management </h2> ({{ $userCount }})</div>
 
         <!-- Search and Per Page -->
         <form method="GET" action="{{ route('admin.index') }}" class="row g-3 mb-4">

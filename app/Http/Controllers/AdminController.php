@@ -38,38 +38,7 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new user.
      */
-    public function create()
-    {
-        return view('admin.create');
-    }
-
-    /**
-     * Store a newly created user in storage.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'first_name'     => 'required|string|max:255',
-            'last_name'      => 'required|string|max:255',
-            'email'          => 'required|email|unique:users,email',
-            'phone'          => 'nullable|string|max:20',
-            'date_of_birth'  => 'nullable|date',
-            'address'        => 'nullable|string|max:255',
-            'city'           => 'nullable|string|max:100',
-            'country'        => 'nullable|string|max:100',
-            'occupation'     => 'nullable|string|max:100',
-            'status'         => ['required', Rule::in(['Active', 'Inactive', 'Suspended'])],
-            'password'       => 'required|string|min:6|confirmed',
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']);
-        $validated['role'] = 'User'; // Always assign 'User' role when creating
-
-        User::create($validated);
-
-        return redirect()->route('admin.index')->with('success', 'User created successfully.');
-    }
-
+    
     /**
      * Display the specified user.
      */

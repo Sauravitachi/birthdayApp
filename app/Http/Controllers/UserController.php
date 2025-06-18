@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
 {
@@ -43,5 +44,43 @@ class UserController extends Controller
 
         return redirect()->route('user.show')
             ->with('success', 'Profile updated successfully!');
+    }
+
+    public function exportCsv(): StreamedResponse
+    {
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="users.csv"',
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, [
+                'ID', 'First Name', 'Last Name', 'Email', 'Phone', 'Date of Birth',
+                'Status', 'Occupation', 'Company', 'Created At'
+            ]);
+
+            $users = \App\Models\User::all();
+
+            foreach ($users as $user) {
+                fputcsv($handle, [
+                    $user->id,
+                    $user->first_name,
+                    $user->last_name,
+                    $user->email,
+                    $user->phone,
+                    optional($user->date_of_birth)->format('Y-m-d'),
+                    $user->status,
+                    $user->occupation,
+                    $user->company,
+                    $user->created_at->toDateTimeString(),
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'show'])->name('user.show');
     Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user', [UserController::class, 'update'])->name('user.update');
+    Route::get('/users/export/csv', [UserController::class, 'exportCsv'])->name('users.export.csv');
+
 });
 
 require __DIR__.'/auth.php';
