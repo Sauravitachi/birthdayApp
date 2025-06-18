@@ -35,9 +35,6 @@ class UserController extends Controller
             'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
-            'company' => 'nullable|string|max:255',
-            'gender' => 'required|in:male,female,other',
-            'marital_status' => 'nullable|in:single,married,divorced',
         ]);
 
         $user->update($validated);

@@ -9,7 +9,7 @@ class UserApiController extends Controller
     public function index()
 {
     $users = User::select('id', 'first_name', 'last_name', 'email', 'phone', 'date_of_birth', 'status', 'occupation', 'created_at')
-        ->paginate(100); 
+        ->paginate(10); 
 
     return response()->json([
         'success' => true,

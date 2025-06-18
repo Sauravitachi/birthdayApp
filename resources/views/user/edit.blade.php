@@ -61,58 +61,26 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label required">Date of Birth</label>
-                                    <<input type="date" class="form-control" name="date_of_birth"
+                                    <input type="date" class="form-control" name="date_of_birth"
                                         value="{{ old('date_of_birth', $user->date_of_birth ? $user->date_of_birth->format('Y-m-d') : '') }}"
                                         required>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label required">Gender</label>
-                                    <select class="form-select" name="gender" required>
-                                        <option value="male" {{ old('gender', $user->gender) === 'male' ? 'selected' : '' }}>
-                                            Male</option>
-                                        <option value="female" {{ old('gender', $user->gender) === 'female' ? 'selected' : '' }}>Female</option>
-                                        <option value="other" {{ old('gender', $user->gender) === 'other' ? 'selected' : '' }}>Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label required">Address</label>
-                            <input type="text" class="form-control" name="address"
-                                value="{{ old('address', $user->address) }}" required>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label required">City</label>
                                     <input type="text" class="form-control" name="city"
                                         value="{{ old('city', $user->city) }}" required>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label required">Country</label>
-                                    <input type="text" class="form-control" name="country"
-                                        value="{{ old('country', $user->country) }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Marital Status</label>
-                                    <select class="form-select" name="marital_status">
-                                        <option value="">Select status</option>
-                                        <option value="single" {{ old('marital_status', $user->marital_status) === 'single' ? 'selected' : '' }}>Single</option>
-                                        <option value="married" {{ old('marital_status', $user->marital_status) === 'married' ? 'selected' : '' }}>Married</option>
-                                        <option value="divorced" {{ old('marital_status', $user->marital_status) === 'divorced' ? 'selected' : '' }}>Divorced</option>
-                                    </select>
-                                </div>
-                            </div>
+                            </div>                           
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label required">Address</label>
+                            <textarea class="form-control" name="address"
+                                required>{{ old('address', $user->address) }}</textarea>
+                        </div>
+                      
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -120,14 +88,14 @@
                                     <input type="text" class="form-control" name="occupation"
                                         value="{{ old('occupation', $user->occupation) }}" required>
                                 </div>
-                            </div>
+                            </div>   
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Company</label>
-                                    <input type="text" class="form-control" name="company"
-                                        value="{{ old('company', $user->company) }}">
+                                    <label class="form-label required">Country</label>
+                                    <input type="text" class="form-control" name="country"
+                                        value="{{ old('country', $user->country) }}" required>
                                 </div>
-                            </div>
+                            </div>                               
                         </div>
 
                         <div class="mt-4">
